@@ -50,28 +50,28 @@ securityContext: {}
 
 service:
   type: ClusterIP
-  port: 80
+  port: 5000
 
 ingress:
   enabled: true
   annotations:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+    cert-manager.io/cluster-issuer: acdh-prod
   hosts:
-    - host: checkmk.acdh-dev.oeaw.ac.at
+    - host: checkmk.logcluster.acdh-dev.oeaw.ac.at
       paths: 
         - backend:
             service:
               name: checkmk
               port:
-                number: 80
+                number: 5000
           path: /
-          pathType: Prefix
+          pathType: ImplementationSpecific
   tls: 
-    - secretName: checkmk-acdh-dev-tls
+    - secretName: checkmk-logcluster-acdh-dev-tls
       hosts:
-        - checkmk.acdh-dev.oeaw.ac.at
+        - checkmk.logcluster.acdh-dev.oeaw.ac.at
   className: nginx
 
 resources: {}
