@@ -60,7 +60,14 @@ ingress:
     cert-manager.io/cluster-issuer: letsencrypt-prod
   hosts:
     - host: checkmk.acdh-dev.oeaw.ac.at
-      paths: []
+      paths: 
+        - backend:
+            service:
+              name: checkmk
+              port:
+                number: 80
+          path: /
+          pathType: Prefix
   tls: 
     - secretName: checkmk-acdh-dev-tls
       hosts:
